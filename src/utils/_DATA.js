@@ -142,7 +142,7 @@ export function _loginUser({ user, password }) {
     }
 
     setTimeout(() => {
-      const existUser = users[`${user}`];
+      const existUser = users[user];
       if (!existUser) {
         reject("User is not exist.");
       }

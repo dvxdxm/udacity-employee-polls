@@ -16,29 +16,6 @@ a {
   padding: 10px;
 }
 
-.btn {
-  text-transform: uppercase;
-  margin: 35px auto;
-  padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.29);
-  cursor: pointer;
-  background: #fff;
-  font-size: 16px;
-  width: 250px;
-  position: relative;
-}
-
-.btn:hover {
-  border-color: rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-}
-
-.btn:focus {
-  outline: 0;
-  font-weight: 700;
-  border-width: 2px;
-}
-
 .center {
   text-align: center;
 }
@@ -88,7 +65,101 @@ li {
 }
 
 .session-login {
-  width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 16px;
+}
+
+.avartar-login {
+  display: flex;
+  justify-content: center;
+}
+
+.img-login {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+}
+
+.item span {
+  margin-bottom: 4px;
+}
+
+.item-input {
+  position: relative;
+  width: 100%;
+}
+
+.item-input input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  font-family: "item", sans-serif;
+  border: 2px solid #000;
+  border-radius: 4px;
+  outline: none;
+  background: transparent;
+  color: #333;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.item-input input::placeholder {
+  color: #aaa;
+}
+
+.item-input input:focus {
+  border-color: #0b4e96;
+  background-color: #f9f9f9;
+}
+
+.login-btn {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  margin-top: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-family: "Interstate", sans-serif;
+  font-weight: bold;
+  color: #fff;
+  background-color: #0b5eb8;
+  border: 2px solid #0b5eb8;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0b4e96;
+  color: #fff;
+  border-color: #0b4e96;
+}
+
+.btn:active {
+  background-color: #0b4e96;
+  border-color: #0b4e96;
+  color: #fff;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
 }
