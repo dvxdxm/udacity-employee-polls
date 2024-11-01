@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
 import LoadingBar from "react-redux-loading-bar";
-import NewTweet from "./NewTweet";
-import TweetPage from "./TweetPage";
+import AddNewQuestionPage from "./AddNewQuestionPage";
+import LeaderBoardPage from "./LeaderBoardPage";
 import Nav from "./Nav";
 import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { AUTHENTICATED_USER } from "../utils/constant";
 import LoginPage from "./LoginPage";
 
 const App = (props) => {
@@ -16,7 +16,8 @@ const App = (props) => {
 
   useEffect(() => {
     props.dispatch(handleInitialData());
-    if (props.authedUser === null) {
+    const userAuthenticated = localStorage.getItem(AUTHENTICATED_USER);
+    if (props.authedUser === null && userAuthenticated === null) {
       navigate("/login");
     }
   }, []);
@@ -24,6 +25,7 @@ const App = (props) => {
   return (
     <Fragment>
       <LoadingBar />
+      {props.authedUser !== null && <Nav />}
       <div className="container">
         {props.authedUser === null ? (
           <Routes>
@@ -31,11 +33,10 @@ const App = (props) => {
           </Routes>
         ) : (
           <div>
-            <Nav />
             <Routes>
               <Route path="/" exact element={<Dashboard />} />
-              <Route path="/tweet/:id" element={<TweetPage />} />
-              <Route path="/new" element={<NewTweet />} />
+              <Route path="/leader-board" element={<LeaderBoardPage />} />
+              <Route path="/new" element={<AddNewQuestionPage />} />
             </Routes>
           </div>
         )}

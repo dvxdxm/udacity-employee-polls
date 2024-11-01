@@ -1,8 +1,10 @@
 import { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { handleLoginUser } from "../actions/authedUser";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ dispatch }) => {
+    const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,6 +15,8 @@ const LoginPage = ({ dispatch }) => {
 
     setUser("");
     setPassword("");
+
+    navigate("/");
   };
 
   const handleUserInputChange = (e) => {
