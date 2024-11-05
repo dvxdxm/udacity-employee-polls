@@ -1,83 +1,85 @@
 import { connect } from "react-redux";
 import { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
+import { formatDate } from "../utils/helpers";
+
+const isUnanswered = (question, answerKeys) =>
+  !answerKeys.includes(question.id);
+
+const isAnswered = (question, answerKeys) => answerKeys.includes(question.id);
 
 const Dashboard = (props) => {
+  const navigate = useNavigate();
+  const questions = Object.values(props.questions);
+  const answerKeys = Object.keys(props.currentQuestionAnswers);
+  const answered = questions.filter((f) => isAnswered(f, answerKeys));
+  const unanswered = questions.filter((f) => isUnanswered(f, answerKeys));
+
+  const handleShowDetail = (e, question_id) => {
+    e.preventDefault();
+
+    navigate(`/questions/${question_id}`);
+  };
   return (
     <Fragment>
-      <div class="section">
-        <div class="section-title">New Questions</div>
-        <div class="card-container">
-          <div class="card">
-            <div class="card-body">
-              <div class="username">mtsamis</div>
-              <div class="timestamp">4:11 PM | 11/23/2021</div>
-            </div>
-            <button class="show-btn">Show</button>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="username">sarahedo</div>
-              <div class="timestamp">5:22 PM | 3/3/2017</div>
-            </div>
-            <button class="show-btn">Show</button>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="username">tylermcginnis</div>
-              <div class="timestamp">6:42 AM | 12/24/2016</div>
-            </div>
-            <button class="show-btn">Show</button>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="username">sarahedo</div>
-              <div class="timestamp">10:21 PM | 6/28/2016</div>
-            </div>
-            <button class="show-btn">Show</button>
+      {unanswered.length > 0 && (
+        <div className="section">
+          <div className="section-title">New Questions</div>
+          <div className="card-container">
+            {unanswered.map((item) => {
+              return (
+                <div className="card">
+                  <div className="card-body">
+                    <div className="username">{item.author}</div>
+                    <div className="timestamp">
+                      {formatDate(item.timestamp)}
+                    </div>
+                  </div>
+                  <button className="show-btn">Show</button>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-      <div class="section">
-        <div class="section-title">Done</div>
-        <div class="card-container">
-          <div class="card">
-            <div class="card-body">
-              <div class="username">tylermcginnis</div>
-              <div class="timestamp">6:42 AM | 12/24/2016</div>
-            </div>
-            <button class="show-btn">Show</button>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="username">tylermcginnis</div>
-              <div class="timestamp">6:42 AM | 12/24/2016</div>
-            </div>
-            <button class="show-btn">Show</button>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="username">tylermcginnis</div>
-              <div class="timestamp">6:42 AM | 12/24/2016</div>
-            </div>
-            <button class="show-btn">Show</button>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="username">tylermcginnis</div>
-              <div class="timestamp">6:42 AM | 12/24/2016</div>
-            </div>
-            <button class="show-btn">Show</button>
+      )}
+      {answered.length > 0 && (
+        <div className="section">
+          <div className="section-title">Done</div>
+          <div className="card-container">
+            {answered.length > 0 &&
+              answered.map((item) => {
+                return (
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="username">{item.author}</div>
+                      <div className="timestamp">
+                        {formatDate(item.timestamp)}
+                      </div>
+                    </div>
+                    <button
+                      className="show-btn"
+                      onClick={(e) => handleShowDetail(e, item.id)}
+                    >
+                      Show
+                    </button>
+                  </div>
+                );
+              })}
           </div>
         </div>
-      </div>
+      )}
     </Fragment>
   );
 };
 
-const mapStateToProps = ({ tweets }) => ({
-  // tweetIds: Object.keys(tweets).sort(
-  //   (a, b) => tweets[b].timestamp - tweets[a].timestamp
-  // ),
-});
+const mapStateToProps = ({ authedUser, questions, users }) => {
+  const currentQuestionAnswers = users[authedUser].answers;
+
+  return {
+    authedUser,
+    questions,
+    currentQuestionAnswers,
+  };
+};
 
 export default connect(mapStateToProps)(Dashboard);

@@ -288,3 +288,75 @@ nav a {
   background-color: #28a745;
   color: #fff;
 }
+
+/* Detail Poll Page */
+.poll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.poll-author {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.poll-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #d9e9f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.poll-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.option {
+  text-align: center;
+}
+.option-text {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.option p {
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+.option button {
+  background-color: #66b2b2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  width: 100%;
+}
+
+.option button:hover {
+  background-color: #558a8a;
+}

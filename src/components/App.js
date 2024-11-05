@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AUTHENTICATED_USER } from "../utils/constant";
 import LoginPage from "./LoginPage";
+import QuestionDetailPage from "./QuestionDetailPage";
 
 const App = (props) => {
   const navigate = useNavigate();
@@ -32,11 +33,15 @@ const App = (props) => {
             <Route path="/login" exact element={<LoginPage />} />
           </Routes>
         ) : (
-          <div>
+          <div >
             <Routes>
               <Route path="/" exact element={<Dashboard />} />
               <Route path="/leader-board" element={<LeaderBoardPage />} />
               <Route path="/new" element={<AddNewQuestionPage />} />
+              <Route
+                path="/questions/:question_id"
+                element={<QuestionDetailPage />}
+              />
             </Routes>
           </div>
         )}
