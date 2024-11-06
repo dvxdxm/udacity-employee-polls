@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { handleToggleTweet } from "../actions/tweets";
-import { Fragment } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const withRouter = (Component) => {
@@ -34,7 +33,7 @@ const QuestionDetailPage = (props) => {
   }
 
   const { author, optionOne, optionTwo } = props.question;
-  const { avatarURL } = props.author;
+  const { avatarURL } = props.users[author];
 
   return (
     <div className="poll">
@@ -73,11 +72,10 @@ const QuestionDetailPage = (props) => {
 const mapStateToProps = ({ authedUser, questions, users }, props) => {
   const { question_id } = props.router.params;
   const question = questions[question_id];
-  
-  const author = users[question.author];
+
   return {
     authedUser,
-    author,
+    users,
     question,
   };
 };
