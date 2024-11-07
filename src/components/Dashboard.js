@@ -22,20 +22,26 @@ const Dashboard = (props) => {
   };
   return (
     <Fragment>
+      
       {unanswered.length > 0 && (
         <div className="section">
           <div className="section-title">New Questions</div>
           <div className="card-container">
             {unanswered.map((item) => {
               return (
-                <div className="card">
+                <div className="card" key={item.id}>
                   <div className="card-body">
                     <div className="username">{item.author}</div>
                     <div className="timestamp">
                       {formatDate(item.timestamp)}
                     </div>
                   </div>
-                  <button className="show-btn">Show</button>
+                  <button
+                    className="show-btn"
+                    onClick={(e) => handleShowDetail(e, item.id)}
+                  >
+                    Show
+                  </button>
                 </div>
               );
             })}
@@ -49,7 +55,7 @@ const Dashboard = (props) => {
             {answered.length > 0 &&
               answered.map((item) => {
                 return (
-                  <div className="card">
+                  <div className="card" key={item.id}>
                     <div className="card-body">
                       <div className="username">{item.author}</div>
                       <div className="timestamp">

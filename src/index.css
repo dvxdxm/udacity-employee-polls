@@ -329,6 +329,7 @@ nav a {
 
 .option {
   text-align: center;
+  width: 45%;
 }
 .option-text {
   flex: 1;
@@ -359,4 +360,36 @@ nav a {
 
 .option button:hover {
   background-color: #558a8a;
+}
+
+.vote-info {
+  margin-top: 10px;
+  text-align: left;
+  color: #333;
+}
+
+.vote-count,
+.vote-percentage {
+  color: #00796b;
+  font-weight: bold;
+}
+
+.selected {
+  background-color: #e0f7fa;
+  border: 2px solid #11b0bb;
+}
+
+.selected .option-btn button {
+  background-color: #11b0bb;
+}
+
+.selected .option-btn button:hover {
+  background-color: #558a8a;
+}
+
+/* Not Found Page */
+.error-404 {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-top: 50px;
 }
