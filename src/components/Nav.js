@@ -1,23 +1,34 @@
 import { Link } from "react-router-dom";
+import { AUTHENTICATED_USER } from "../utils/constant";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const routes = [
+let routes = [
   {
     path: "/",
     menuName: "Home",
-    active: "/" === window.location.pathname,
+    active: false,
   },
   {
     path: "/leader-board",
     menuName: "Leader Board",
-    active: "/leader-board" === window.location.pathname,
+    active: false,
   },
   {
     path: "/new",
     menuName: "New",
-    active: "/new" === window.location.pathname,
+    active: false,
   },
 ];
-const Nav = () => {
+const Nav = (props) => {
+  const navigate = useNavigate();
+  const { authedUser, users } = props;
+  const currentUser = users[authedUser];
+  // init data
+  routes.forEach((route) => {
+    route.active = route.path === window.location.pathname;
+  });
+
   const handlerClickMenuItem = (item) => {
     if (item) {
       routes.forEach((route) => {
@@ -26,7 +37,12 @@ const Nav = () => {
     }
   };
 
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem(AUTHENTICATED_USER);
+    navigate("/login");
+    window.location.reload();
+  };
+
   return (
     <div className="section-header">
       <nav className="nav">
@@ -46,18 +62,18 @@ const Nav = () => {
       </nav>
       <div className="section-profile">
         <div className="profile">
-          <img
-            src="https://img.icons8.com/?size=100&id=975TGR2GPGX1&format=png&color=000000"
-            alt="sarahedo"
-          />
-          <span>sarahedo</span>
+          <img src={currentUser.avatarURL} alt={currentUser.id} />
+          <span>{currentUser.id}</span>
         </div>
-        <a href="#" onClick={logout}>
-          Logout
-        </a>
+        <button onClick={logout}>Logout</button>
       </div>
     </div>
   );
 };
 
-export default Nav;
+const mapStateToProps = ({ authedUser, users }) => ({
+  authedUser,
+  users,
+});
+
+export default connect(mapStateToProps)(Nav);

@@ -76,10 +76,6 @@ const AddNewQuestionPage = ({ dispatch }) => {
   );
 };
 
-const mapStateToProps = () => ({
-  // tweetIds: Object.keys(tweets).sort(
-  //   (a, b) => tweets[b].timestamp - tweets[a].timestamp
-  // ),
-});
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(AddNewQuestionPage);

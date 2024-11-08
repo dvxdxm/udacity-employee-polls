@@ -207,12 +207,23 @@ export function _saveQuestion(question) {
 
     const formattedQuestion = formatQuestion(question);
     setTimeout(() => {
+      users = {
+        ...users,
+        [question.author]: {
+          ...users[question.author],
+          questions: [
+            ...users[question.author].questions,
+            formattedQuestion.id,
+          ],
+        },
+      };
+
       questions = {
         ...questions,
         [formattedQuestion.id]: formattedQuestion,
       };
 
-      resolve(questions);
+      resolve({ questions, users });
     }, 1000);
   });
 }
@@ -245,6 +256,7 @@ export function _saveQuestionAnswer({
           ],
         },
       };
+
       questions = {
         ...questions,
         [questionId]: {

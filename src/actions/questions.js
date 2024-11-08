@@ -1,6 +1,7 @@
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { saveQuestionAnswer, saveQuestion } from "../utils/api";
 import { updateUser } from "../actions/users";
+import { receiveUsers } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_QUESTION = "ADD_QUESTION";
@@ -50,7 +51,8 @@ export function handleAddNewPoll({ optionOne, optionTwo }) {
       optionTwoText: optionTwo,
       author: authedUser,
     })
-      .then((questions) => {
+      .then(({ questions, users }) => {
+        dispatch(receiveUsers(users));
         dispatch(receiveQuestions(questions));
       })
       .then(() => dispatch(hideLoading()));

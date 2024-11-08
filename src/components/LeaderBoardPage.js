@@ -1,9 +1,19 @@
 import { connect } from "react-redux";
 
 const LeaderBoardPage = (props) => {
+  const { users } = props;
+  let userValues = Object.values(users).sort((preUser, nextUser) => {
+    let sum =
+      Object.keys(nextUser.answers).length +
+      nextUser.questions.length -
+      (Object.keys(preUser.answers).length + preUser.questions.length);
+      
+    return sum;
+  });
+
   return (
     <div>
-      <table class="user-table">
+      <table className="user-table">
         <thead>
           <tr>
             <th>Users</th>
@@ -12,72 +22,35 @@ const LeaderBoardPage = (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="user-info">
-                <img src="path/to/avatar1.jpg" alt="Sarah Edo" />
-                <div>
-                  <strong>Sarah Edo</strong>
-                  <br />
-                  <span>sarahedo</span>
-                </div>
-              </div>
-            </td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-info">
-                <img src="path/to/avatar2.jpg" alt="Mike Tsamis" />
-                <div>
-                  <strong>Mike Tsamis</strong>
-                  <br />
-                  <span>mtsamis</span>
-                </div>
-              </div>
-            </td>
-            <td>3</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-info">
-                <img src="path/to/avatar3.jpg" alt="Tyler McGinnis" />
-                <div>
-                  <strong>Tyler McGinnis</strong>
-                  <br />
-                  <span>tylermcginnis</span>
-                </div>
-              </div>
-            </td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-info">
-                <img src="path/to/avatar4.jpg" alt="Zenobia Oshikanlu" />
-                <div>
-                  <strong>Zenobia Oshikanlu</strong>
-                  <br />
-                  <span>zoshikanlu</span>
-                </div>
-              </div>
-            </td>
-            <td>1</td>
-            <td>0</td>
-          </tr>
+          {userValues.length > 0 &&
+            userValues.map((item, key) => {
+              return (
+                <tr key={key}>
+                  <td>
+                    <div className="user-info">
+                      <img src={item.avatarURL} alt={item.name} />
+                      <div>
+                        <strong>{item.name}</strong>
+                        <br />
+                        <span>{item.id}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{Object.keys(item.answers).length}</td>
+                  <td>{item.questions.length}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
   );
 };
 
-const mapStateToProps = () => ({
-  // tweetIds: Object.keys(tweets).sort(
-  //   (a, b) => tweets[b].timestamp - tweets[a].timestamp
-  // ),
-});
+const mapStateToProps = ({ users }) => {
+  return {
+    users,
+  };
+};
 
 export default connect(mapStateToProps)(LeaderBoardPage);
