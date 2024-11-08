@@ -4,7 +4,7 @@ import { handleLoginUser } from "../actions/authedUser";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ dispatch }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,7 +37,11 @@ const LoginPage = ({ dispatch }) => {
     <Fragment>
       <h1 className="center">Employee Polls</h1>
       <div className="avartar-login">
-        <img className="img-login" src="../images/avatar_login.jpg" alt="Avatar" />
+        <img
+          className="img-login"
+          src="../images/avatar_login.jpg"
+          alt="Avatar"
+        />
       </div>
       <div>
         <h3 className="center">Login</h3>

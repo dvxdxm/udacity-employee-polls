@@ -393,3 +393,57 @@ nav a {
   font-family: Arial, sans-serif;
   margin-top: 50px;
 }
+
+/* Add new Poll page */
+.title-new-poll {
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+/* Leaderboard */
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: #fff;
+}
+
+.user-table thead {
+  background-color: #f1f3f5;
+}
+
+.user-table th,
+.user-table td {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.user-info strong {
+  font-size: 14px;
+  display: block;
+}
+
+.user-info span {
+  font-size: 13px;
+  color: #555;
+}

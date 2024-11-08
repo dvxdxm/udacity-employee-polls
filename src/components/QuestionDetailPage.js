@@ -69,6 +69,7 @@ const QuestionDetailPage = (props) => {
           </div>
           <div className="option-btn">
             <button
+              disabled={optionOne?.votes.includes(authedUser)}
               onClick={(e) => handleVoteQuestion(e, "optionOne", "optionTwo")}
             >
               Click
@@ -98,6 +99,7 @@ const QuestionDetailPage = (props) => {
           </div>
           <div className="option-btn">
             <button
+              disabled={optionTwo?.votes.includes(authedUser)}
               onClick={(e) => handleVoteQuestion(e, "optionTwo", "optionOne")}
             >
               Click

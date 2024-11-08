@@ -212,7 +212,7 @@ export function _saveQuestion(question) {
         [formattedQuestion.id]: formattedQuestion,
       };
 
-      resolve(formattedQuestion);
+      resolve(questions);
     }, 1000);
   });
 }
