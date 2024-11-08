@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { handleToggleTweet } from "../actions/tweets";
+import { handleVotedQuestion } from "../actions/questions";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const withRouter = (Component) => {
@@ -14,18 +14,14 @@ const withRouter = (Component) => {
 };
 
 const QuestionDetailPage = (props) => {
-  const { dispatch, tweet, authedUser } = props;
+  const { dispatch, question, authedUser } = props;
+  const { id, author, optionOne, optionTwo } = question;
+  const { avatarURL } = props.users[author];
+  const users = Object.keys(props.users);
 
-  const handleVote = (e) => {
+  const handleVoteQuestion = (e, newAnswer, currentAnswer) => {
     e.preventDefault();
-
-    // dispatch(
-    //   handleToggleTweet({
-    //     id: tweet.id,
-    //     hasLiked: tweet.hasLiked,
-    //     authedUser,
-    //   })
-    // );
+    dispatch(handleVotedQuestion({ questionId: id, newAnswer, currentAnswer }));
   };
 
   if (props.question === null) {
@@ -36,10 +32,6 @@ const QuestionDetailPage = (props) => {
       </div>
     );
   }
-
-  const { author, optionOne, optionTwo } = props.question;
-  const { avatarURL } = props.users[author];
-  const users = Object.keys(props.users);
 
   return (
     <div className="poll">
@@ -76,7 +68,11 @@ const QuestionDetailPage = (props) => {
             </div>
           </div>
           <div className="option-btn">
-            <button>Click</button>
+            <button
+              onClick={(e) => handleVoteQuestion(e, "optionOne", "optionTwo")}
+            >
+              Click
+            </button>
           </div>
         </div>
         <div
@@ -101,7 +97,11 @@ const QuestionDetailPage = (props) => {
             </div>
           </div>
           <div className="option-btn">
-            <button>Click</button>
+            <button
+              onClick={(e) => handleVoteQuestion(e, "optionTwo", "optionOne")}
+            >
+              Click
+            </button>
           </div>
         </div>
       </div>

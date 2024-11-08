@@ -22,7 +22,6 @@ const Dashboard = (props) => {
   };
   return (
     <Fragment>
-      
       {unanswered.length > 0 && (
         <div className="section">
           <div className="section-title">New Questions</div>

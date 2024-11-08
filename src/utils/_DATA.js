@@ -3,7 +3,8 @@ let users = {
     id: "sarahedo",
     password: "password123",
     name: "Sarah Edo",
-    avatarURL: "https://img.icons8.com/?size=100&id=110193&format=png&color=000000",
+    avatarURL:
+      "https://img.icons8.com/?size=100&id=110193&format=png&color=000000",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionOne",
@@ -16,7 +17,8 @@ let users = {
     id: "tylermcginnis",
     password: "abc321",
     name: "Tyler McGinnis",
-    avatarURL: "https://img.icons8.com/?size=100&id=8FOh48dn2E41&format=png&color=000000",
+    avatarURL:
+      "https://img.icons8.com/?size=100&id=8FOh48dn2E41&format=png&color=000000",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -27,7 +29,8 @@ let users = {
     id: "mtsamis",
     password: "xyz123",
     name: "Mike Tsamis",
-    avatarURL: "https://img.icons8.com/?size=100&id=0QZdwge3kLde&format=png&color=000000",
+    avatarURL:
+      "https://img.icons8.com/?size=100&id=0QZdwge3kLde&format=png&color=000000",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -39,7 +42,8 @@ let users = {
     id: "zoshikanlu",
     password: "pass246",
     name: "Zenobia Oshikanlu",
-    avatarURL: "https://img.icons8.com/?size=100&id=975TGR2GPGX1&format=png&color=000000",
+    avatarURL:
+      "https://img.icons8.com/?size=100&id=975TGR2GPGX1&format=png&color=000000",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
     },
@@ -213,10 +217,17 @@ export function _saveQuestion(question) {
   });
 }
 
-export function _saveQuestionAnswer({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer({
+  authedUser,
+  questionId,
+  newAnswer,
+  currentAnswer,
+}) {
   return new Promise((resolve, reject) => {
-    if (!authedUser || !qid || !answer) {
-      reject("Please provide authedUser, qid, and answer");
+    if (!authedUser || !questionId || !newAnswer || !currentAnswer) {
+      reject(
+        "Please provide authedUser, questionId, currentAnswer and newAnswer"
+      );
     }
 
     setTimeout(() => {
@@ -226,23 +237,32 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           ...users[authedUser],
           answers: {
             ...users[authedUser].answers,
-            [qid]: answer,
+            [questionId]: newAnswer,
           },
+          questions: [
+            ...users[authedUser].questions.filter((f) => f !== questionId),
+            questionId,
+          ],
         },
       };
-
       questions = {
         ...questions,
-        [qid]: {
-          ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
+        [questionId]: {
+          ...questions[questionId],
+          [newAnswer]: {
+            ...questions[questionId][newAnswer],
+            votes: questions[questionId][newAnswer]?.votes.concat([authedUser]),
+          },
+          [currentAnswer]: {
+            ...questions[questionId][currentAnswer],
+            votes: questions[questionId][currentAnswer]?.votes.filter(
+              (f) => f !== authedUser
+            ),
           },
         },
       };
 
-      resolve(true);
+      resolve({ question: questions[questionId], user: users[authedUser] });
     }, 500);
   });
 }
