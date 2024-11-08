@@ -8,18 +8,6 @@ export default function questions(state = {}, action) {
         ...action.questions,
       };
     case ADD_QUESTION:
-      // const { question } = action;
-
-      // let newQuestion = {};
-      // if (question.id !== null) {
-      //   newQuestion = {
-      //     [question.id]: {
-      //       ...state[tweet.replyingTo],
-      //       replies: state[tweet.replyingTo].replies.concat([tweet.id]),
-      //     },
-      //   };
-      // }
-
       return {
         ...state,
         [action.question.id]: action.question,
