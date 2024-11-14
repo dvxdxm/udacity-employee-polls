@@ -33,7 +33,9 @@ const AddNewQuestionPage = ({ dispatch }) => {
 
   return (
     <Fragment>
-      <h1 className="center">Would You Rather</h1>
+      <h1 className="center" data-testid={"title-poll"}>
+        Would You Rather
+      </h1>
 
       <div>
         <span className="center title-new-poll">Create Your Own Poll</span>

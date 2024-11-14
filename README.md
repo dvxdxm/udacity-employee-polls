@@ -1,21 +1,13 @@
-# Chirper Project
+# Udacity Employee Poll Project
 
 This repo is a code-along with the first project in the React Nanodegree program.
 
-Most of the commits in this repository correspond to videos in the program.
-
 ## Project Setup
-
-- Clone the Project.
-- Install the dependencies: `npm install`
-- Start the server: `npm start`
-
-## Contributing
-
-Because this is a code-along project and the commits correspond to specific videos in the program, we will not be accepting pull requests.
-
-If you feel like there's a major problem, please open an issue to discuss the problem and potential resolution.
-
-## License
-
-MIT
+- Dowload and install the application : https://nodejs.org/en/download/package-manager
+- Running locally:
+    - Clone the Project from [Github](https://github.com/dvxdxm/udacity-employee-polls.git).
+    - Open terminal
+    - Install the dependencies: `npm install`
+    - Start the server: `npm start`
+- Running test:
+    - To run unit test, run command: `npm test`

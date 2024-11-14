@@ -35,7 +35,7 @@ const LoginPage = ({ dispatch }) => {
 
   return (
     <Fragment>
-      <h1 className="center">Employee Polls</h1>
+      <h1 className="center" data-testid={"login-page-title"}>Employee Polls</h1>
       <div className="avartar-login">
         <img
           className="img-login"

@@ -212,7 +212,7 @@ export function _saveQuestion(question) {
         [question.author]: {
           ...users[question.author],
           questions: [
-            ...users[question.author].questions,
+            ...users[question.author]?.questions,
             formattedQuestion.id,
           ],
         },
@@ -278,3 +278,6 @@ export function _saveQuestionAnswer({
     }, 500);
   });
 }
+
+// Export for target write unit test
+export { formatQuestion as _testFormatQuestion };

@@ -7,7 +7,7 @@ const LeaderBoardPage = (props) => {
       Object.keys(nextUser.answers).length +
       nextUser.questions.length -
       (Object.keys(preUser.answers).length + preUser.questions.length);
-      
+
     return sum;
   });
 
@@ -36,7 +36,9 @@ const LeaderBoardPage = (props) => {
                       </div>
                     </div>
                   </td>
-                  <td>{Object.keys(item.answers).length}</td>
+                  <td data-testid={"answered"}>
+                    {Object.keys(item.answers).length}
+                  </td>
                   <td>{item.questions.length}</td>
                 </tr>
               );
