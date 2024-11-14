@@ -12,7 +12,7 @@ jest.mock("react-router-dom", () => ({
 describe("LoginPage component", () => {
   const mockStore = configureMockStore();
   const store = mockStore({});
-  
+
   it("should render success when access login to app", () => {
     const mockNavigate = jest.fn();
     useNavigate.mockReturnValue(mockNavigate);
@@ -29,4 +29,18 @@ describe("LoginPage component", () => {
     const button = screen.getByText("Submit");
     expect(button.hasAttribute("disabled")).toBe(true);
   });
+
+  it("will match snapshot", () => {
+    const mockNavigate = jest.fn();
+    useNavigate.mockReturnValue(mockNavigate);
+
+    render(
+      <Provider store={store}>
+        <LoginPage />
+      </Provider>
+    );
+
+    expect(document.body).toMatchSnapshot();
+  });
+
 });

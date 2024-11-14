@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage component will match snapshot 1`] = `
+<body>
+  <div>
+    <h1
+      class="center"
+      data-testid="login-page-title"
+    >
+      Employee Polls
+    </h1>
+    <div
+      class="avartar-login"
+    >
+      <img
+        alt="Avatar"
+        class="img-login"
+        src="../images/avatar_login.jpg"
+      />
+    </div>
+    <div>
+      <h3
+        class="center"
+      >
+        Login
+      </h3>
+      <form
+        class="session-login"
+      >
+        <div
+          class="item"
+        >
+          <span
+            class="center"
+          >
+            User
+          </span>
+          <div
+            class="item-input"
+          >
+            <input
+              maxlength="280"
+              placeholder="User"
+              required=""
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="item"
+        >
+          <span
+            class="center"
+          >
+            Password
+          </span>
+          <div
+            class="item-input"
+          >
+            <input
+              class="item-input"
+              maxlength="280"
+              placeholder="Password"
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="login-btn"
+        >
+          <button
+            class="btn"
+            disabled=""
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+`;
