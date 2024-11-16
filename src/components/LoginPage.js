@@ -1,22 +1,25 @@
 import { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { handleLoginUser } from "../actions/authedUser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginPage = ({ dispatch }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const { state } = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(handleLoginUser({ user, password }));
+    dispatch(handleLoginUser({ user, password })).then(() => {
+      setTimeout(() => {
+        navigate(state?.path || "/");
+      }, 1000);
+    });
 
     setUser("");
     setPassword("");
-
-    navigate("/");
   };
 
   const handleUserInputChange = (e) => {
@@ -35,7 +38,9 @@ const LoginPage = ({ dispatch }) => {
 
   return (
     <Fragment>
-      <h1 className="center" data-testid={"login-page-title"}>Employee Polls</h1>
+      <h1 className="center" data-testid={"login-page-title"}>
+        Employee Polls
+      </h1>
       <div className="avartar-login">
         <img
           className="img-login"

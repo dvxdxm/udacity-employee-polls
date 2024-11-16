@@ -15,8 +15,6 @@ const withRouter = (Component) => {
 
 const QuestionDetailPage = (props) => {
   const { dispatch, question, authedUser } = props;
-  const { id, author, optionOne, optionTwo } = question;
-  const { avatarURL } = props.users[author];
   const users = Object.keys(props.users);
 
   const handleVoteQuestion = (e, newAnswer, currentAnswer) => {
@@ -32,6 +30,9 @@ const QuestionDetailPage = (props) => {
       </div>
     );
   }
+
+  const { id, author, optionOne, optionTwo } = question;
+  const { avatarURL } = props.users[author];
 
   return (
     <div className="poll">
@@ -113,7 +114,9 @@ const QuestionDetailPage = (props) => {
 
 const mapStateToProps = ({ authedUser, questions, users }, props) => {
   const { question_id } = props.router.params;
-  const question = questions[question_id] ?? null;
+  const questionIds = Object.keys(questions);
+  const checkExistQuestionId = questionIds.find((f) => f === question_id);
+  const question = checkExistQuestionId ? questions[question_id] : null;
 
   return {
     authedUser,

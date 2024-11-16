@@ -6,20 +6,21 @@ import LoadingBar from "react-redux-loading-bar";
 import AddNewQuestionPage from "./AddNewQuestionPage";
 import LeaderBoardPage from "./LeaderBoardPage";
 import Nav from "./Nav";
-import { Routes, Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { AUTHENTICATED_USER } from "../utils/constant";
+import { Routes, Route, useLocation } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import QuestionDetailPage from "./QuestionDetailPage";
+import { useNavigate } from "react-router-dom";
+import { AUTHENTICATED_USER } from "../utils/constant";
 
 const App = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     props.dispatch(handleInitialData());
     const userAuthenticated = localStorage.getItem(AUTHENTICATED_USER);
     if (props.authedUser === null && userAuthenticated === null) {
-      navigate("/login");
+      navigate("/login", { state: { path: location.pathname } });
     }
   }, []);
 
@@ -33,7 +34,7 @@ const App = (props) => {
             <Route path="/login" exact element={<LoginPage />} />
           </Routes>
         ) : (
-          <div >
+          <div>
             <Routes>
               <Route path="/" exact element={<Dashboard />} />
               <Route path="/leader-board" element={<LeaderBoardPage />} />

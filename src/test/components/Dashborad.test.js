@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Dashborad from "../../components/Dashboard";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
@@ -91,7 +91,7 @@ describe("Dashborad component", () => {
     expect(buttonElements.length).toEqual(2);
 
     const button = buttonElements[0];
-    button.click();
+    fireEvent.click(button);
     expect(mockNavigate).toHaveBeenCalledWith("/questions/questionId1");
   });
 });

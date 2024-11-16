@@ -376,11 +376,11 @@ nav a {
 
 .selected {
   background-color: #e0f7fa;
-  border: 2px solid #11b0bb;
+  border: 2px solid #1130bb;
 }
 
 .selected .option-btn button {
-  background-color: #11b0bb;
+  background-color: #1130bb;
 }
 
 .selected .option-btn button:hover {
@@ -445,4 +445,44 @@ nav a {
 .user-info span {
   font-size: 13px;
   color: #555;
+}
+
+/* On/ Off Toggle Button */
+.toggle-btn {
+  background-color: #b7b9ba;
+  border: 1px solid #aaa;
+  border-radius: 99px;
+  width: 60px;
+  height: 38px;
+  transition: background-color 0.1s ease, border-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 10px rgb(0, 0, 0, 0.748);
+  position: relative;
+  display: flex;
+  justify-self: flex-end;
+  margin-bottom: 16px;
+}
+
+.toggle-btn .thumb {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 99px;
+  transition: left 0.15s ease;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toggle-btn.toggled {
+  background-color: #15b58e;
+}
+
+.toggle-btn:hover {
+  border-color: #6f6f6f;
+}
+
+.toggle-btn.toggled .thumb {
+  left: calc(60px - 35px);
 }

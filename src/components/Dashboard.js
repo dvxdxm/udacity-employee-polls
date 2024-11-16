@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 
@@ -9,20 +9,41 @@ const isUnanswered = (question, answerKeys) =>
 const isAnswered = (question, answerKeys) => answerKeys.includes(question.id);
 
 const Dashboard = (props) => {
+  const [toggle, setToggle] = useState(false);
+
   const navigate = useNavigate();
   const questions = Object.values(props.questions);
   const answerKeys = Object.keys(props.currentQuestionAnswers);
-  const answered = questions.filter((f) => isAnswered(f, answerKeys));
-  const unanswered = questions.filter((f) => isUnanswered(f, answerKeys));
+  const answered = questions
+    .filter((f) => isAnswered(f, answerKeys))
+    .sort((preQuestion, nextQuestion) => {
+      let sum = nextQuestion.timestamp - preQuestion.timestamp;
+
+      return sum;
+    });
+  const unanswered = questions
+    .filter((f) => isUnanswered(f, answerKeys))
+    .sort((preQuestion, nextQuestion) => {
+      let sum = nextQuestion.timestamp - preQuestion.timestamp;
+
+      return sum;
+    });
 
   const handleShowDetail = (e, question_id) => {
     e.preventDefault();
 
     navigate(`/questions/${question_id}`);
   };
+
   return (
     <Fragment>
-      {unanswered.length > 0 && (
+      <button
+        className={`toggle-btn ${toggle ? "toggled" : ""}`}
+        onClick={() => setToggle(!toggle)}
+      >
+        <div className="thumb"></div>
+      </button>
+      {unanswered.length > 0 && !toggle && (
         <div className="section">
           <div className="section-title">New Questions</div>
           <div className="card-container">
@@ -47,7 +68,7 @@ const Dashboard = (props) => {
           </div>
         </div>
       )}
-      {answered.length > 0 && (
+      {answered.length > 0 && toggle && (
         <div className="section">
           <div className="section-title">Done</div>
           <div className="card-container">
@@ -78,7 +99,7 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = ({ authedUser, questions, users }) => {
-  const currentQuestionAnswers = users[authedUser].answers;
+  const currentQuestionAnswers = authedUser ? users[authedUser].answers : [];
 
   return {
     authedUser,
